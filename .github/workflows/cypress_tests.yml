@@ -28,35 +28,21 @@ jobs:
           browser: chrome
           
           
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-          
-      - name: Generate Allure report
-        if: always()
-        uses: QuintilianoNery/action-allure-report-V2@0.2.0    
+      - name: Copy test execution videos and screenshots
+        run: |
+          mkdir public
+          cp -r cypress/videos public/videos
+          cp -r cypress/screenshots public/screenshots
+      - name: Merge test reports
+        run: npm run combine:report
 
+      - name: Generate HTML report
+        run: npm run generate:report
       
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        #id: allure-report
+      - name: Deploy report page to GitHub Page
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          allure_results: allure-results
-          #gh_pages: gh-pages
-          #allure_report: allure-report
-          allure_history: allure-history
-          keep_reports: 20
-
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
       
