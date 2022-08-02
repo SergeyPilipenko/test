@@ -23,10 +23,11 @@ jobs:
           
       - name: Cypress.io
         uses: cypress-io/github-action@v4.1.1
+        continue-on-error: true
         with:
           spec: cypress/e2e/1-getting-started/todo.cy.js
           browser: chrome
-          continue-on-error: true
+          
           
           
       - name: Copy test execution videos and screenshots
