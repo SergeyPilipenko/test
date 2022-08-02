@@ -26,7 +26,7 @@ Cypress.on("test:after:run", (test, runnable) => {
 
     addContext({ test }, videoUrl)
 
-    const screenshotUrl = `screenshots/${Cypress.spec.name}/`
+    const screenshotUrl = `screenshots/${Cypress.spec.name}/${test} (failed).png`
 
     addContext({ test }, screenshotUrl)
 
