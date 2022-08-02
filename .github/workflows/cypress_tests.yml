@@ -27,9 +27,6 @@ jobs:
           spec: cypress/e2e/1-getting-started/todo.cy.js
           browser: chrome
           
-      - name: Generate Allure report
-        if: always()
-        uses: QuintilianoNery/action-allure-report-V2@0.2.0    
           
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -37,7 +34,11 @@ jobs:
         continue-on-error: true
         with:
           ref: gh-pages
-          path: gh-pages   
+          path: gh-pages
+          
+      - name: Generate Allure report
+        if: always()
+        uses: QuintilianoNery/action-allure-report-V2@0.2.0    
 
       
       - name: Allure Report action from marketplace
