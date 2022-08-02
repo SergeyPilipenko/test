@@ -33,6 +33,7 @@ jobs:
         with:
           spec: cypress/e2e/1-getting-started/todo.cy.js
           browser: chrome
+          record: true
 
       
       - name: Test marketplace action
