@@ -25,6 +25,14 @@ Cypress.on("test:after:run", (test, runnable) => {
     const videoUrl = 'videos/' + videoName + '.mp4'
 
     addContext({ test }, videoUrl)
+
+    let screenshotName = Cypress.spec.name
+    screenshotName = screenshotName.replace('/.js.*', '.js')
+    const screenshotUrl = 'screenshots/' + screenshotName + '.mp4'
+
+    addContext({ test }, screenshotUrl)
+
+
 });
 
 // Alternatively you can use CommonJS syntax:
